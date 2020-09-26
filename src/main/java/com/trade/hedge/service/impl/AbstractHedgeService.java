@@ -3,18 +3,15 @@ package com.trade.hedge.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.trade.BaseService;
 import com.trade.analyse.model.trade.Track;
-import com.trade.hedge.context.HedgeContext;
 import com.trade.hedge.service.HedgeService;
-import com.trade.huobi.enums.*;
+import com.trade.huobi.enums.ContractDirectionEnum;
+import com.trade.huobi.enums.SymbolUSDTEnum;
 import com.trade.huobi.model.Result;
 import com.trade.huobi.model.contract.Order;
 import com.trade.huobi.model.contract.Position;
 import com.trade.huobi.model.spot.Kline;
-import com.trade.huobi.service.contract.ContractAccountService;
-import com.trade.huobi.service.contract.ContractTradeService;
 import com.trade.huobi.service.spot.SpotMarketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -39,20 +36,19 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         List<Position> positionList = this.getPositionList(track);
         Position buy = this.getPosition(positionList, ContractDirectionEnum.BUY);
         Position sell = this.getPosition(positionList, ContractDirectionEnum.SELL);
-        logger.info("[{}] track={}, isStopTrade={}, buy={}, sell={}, 持仓检查"
-                , LOG_MARK, track, HedgeContext.isStopTrade(), buy, sell);
+        logger.info("[{}] track={}, buy={}, sell={}, 持仓检查", LOG_MARK, track, buy, sell);
 
         // 开多下单
-        if (!HedgeContext.isStopTrade() && buy == null) {
-            Result result = this.open(track, ContractDirectionEnum.BUY, track.getBasisVolume());
+        if (!track.getHedgeConfig().isStopTrade() && buy == null) {
+            Result result = this.open(track, ContractDirectionEnum.BUY, track.getHedgeConfig().getBasisVolume());
             logger.info("[{}] track={}, result={}, 开多下单", LOG_MARK, track, result);
         }
         // 开空下单
-        if (!HedgeContext.isStopTrade() && sell == null) {
-            Result result = this.open(track, ContractDirectionEnum.SELL, track.getBasisVolume());
+        if (!track.getHedgeConfig().isStopTrade() && sell == null) {
+            Result result = this.open(track, ContractDirectionEnum.SELL, track.getHedgeConfig().getBasisVolume());
             logger.info("[{}] track={}, result={}, 开空下单", LOG_MARK, track, result);
         }
-        if (!HedgeContext.isStopTrade() && (buy == null || sell == null)) {
+        if (!track.getHedgeConfig().isStopTrade() && (buy == null || sell == null)) {
             return Result.buildFail("开多/开空, 无持仓");
         }
         // 0: 多, 1: 空
@@ -86,12 +82,12 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         }
         // 2, 开多平仓检查
         Result result = this.closeCheck(track, buy
-                , this.calculateIncomeMultiple(buy, sell, ContractDirectionEnum.BUY)
+                , this.calculateIncomeMultiple(track, buy, sell, ContractDirectionEnum.BUY)
                 , this.calculateCloseLossVolume(track, buy));
         logger.debug("[{}] track={}, result={}, Buy - 开多平仓检查", LOG_MARK, track, result);
         // 3, 开空平仓检查
         result = this.closeCheck(track, sell
-                , this.calculateIncomeMultiple(buy, sell, ContractDirectionEnum.SELL)
+                , this.calculateIncomeMultiple(track, buy, sell, ContractDirectionEnum.SELL)
                 , this.calculateCloseLossVolume(track, sell));
         logger.debug("[{}] track={}, result={}, Sell - 开空平仓检查", LOG_MARK, track, result);
     }
@@ -104,15 +100,17 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
      * @date 2020/9/26 15:00
      * @param buy, sell, direction
      **/
-    protected BigDecimal calculateIncomeMultiple(Position buy, Position sell, ContractDirectionEnum direction) {
+    protected BigDecimal calculateIncomeMultiple(Track track, Position buy, Position sell, ContractDirectionEnum direction) {
         if (buy == null || sell == null) {
             return BigDecimal.ONE;
         }
         BigDecimal incomeMultiple;
         if (ContractDirectionEnum.BUY.equals(direction)) {
-            incomeMultiple = sell.getVolume().divide(buy.getVolume(), new MathContext(2));
+            incomeMultiple = sell.getVolume().divide(buy.getVolume(), new MathContext(2))
+                    .multiply(track.getHedgeConfig().getProfitBasisMultiple());
         } else {
-            incomeMultiple = buy.getVolume().divide(sell.getVolume(), new MathContext(2));
+            incomeMultiple = buy.getVolume().divide(sell.getVolume(), new MathContext(2))
+                    .multiply(track.getHedgeConfig().getProfitBasisMultiple());
         }
         if (incomeMultiple.compareTo(BigDecimal.ONE) < 0) {
             incomeMultiple = BigDecimal.ONE;
@@ -132,7 +130,7 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         if (position != null) {
             return position.getVolume().longValue();
         }
-        return track.getBasisVolume();
+        return track.getHedgeConfig().getBasisVolume();
     }
 
     /**
@@ -190,9 +188,9 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         }
 
         // 2, 同向开仓（basis张）
-        result = this.open(track, ContractDirectionEnum.get(position.getDirection()), track.getBasisVolume());
+        result = this.open(track, ContractDirectionEnum.get(position.getDirection()), track.getHedgeConfig().getBasisVolume());
         logger.info("[{}] track={}, direction={}, result={}, 同向开仓（{}}张）"
-                , LOG_MARK, track, position.getDirection(), result, track.getBasisVolume());
+                , LOG_MARK, track, position.getDirection(), result, track.getHedgeConfig().getBasisVolume());
         if (!result.success()) {
             return result;
         }
@@ -218,7 +216,7 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
      * @date 2020/9/24 20:34
      **/
     protected boolean orderCompleteCheck(Track track, Result result, int count) {
-        if (count > 30) {
+        if (count > track.getHedgeConfig().getTimeout()) {
             return false;
         }
         String orderId = JSONObject.parseObject(result.getData().toString()).getLong("order_id") + "";
@@ -246,7 +244,7 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         // 获取当前收益价格
         BigDecimal incomePrice = this.getIncomePrice(position, kline.getClose());
         // 若未达到计划收益, 则不平仓
-        if (incomePrice.compareTo(track.getIncomePricePlan().multiply(incomeMultiple)) < 0) {
+        if (incomePrice.compareTo(track.getHedgeConfig().getIncomePricePlan().multiply(incomeMultiple)) < 0) {
             return false;
         }
         logger.info("[{}] direction={}, price={}, curr={}, income={}, 达到计划收益条件, 平仓准备"
@@ -256,8 +254,8 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         if (lastIncomePrice.compareTo(incomePrice) > 0) {
             return true;
         }
-        // N秒检查一次
-        this.sleep(750);
+        // Nms检查一次
+        this.sleep(track.getHedgeConfig().getProfitTrackIntervalTime());
         return this.isClose(track, position, incomeMultiple, incomePrice);
     }
 

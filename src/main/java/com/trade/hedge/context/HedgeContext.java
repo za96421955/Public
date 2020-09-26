@@ -14,14 +14,14 @@ public final class HedgeContext {
 
     private HedgeContext() {}
 
-    /** 停止交易 */
-    private static boolean stopTrade = false;
-    public static boolean isStopTrade() {
-        return stopTrade;
-    }
-    public static void setStopTrade(boolean stopTrade) {
-        HedgeContext.stopTrade = stopTrade;
-    }
+//    /** 停止交易 */
+//    private static boolean stopTrade = false;
+//    public static boolean isStopTrade() {
+//        return stopTrade;
+//    }
+//    public static void setStopTrade(boolean stopTrade) {
+//        HedgeContext.stopTrade = stopTrade;
+//    }
 
 }
 

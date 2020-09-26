@@ -1,5 +1,6 @@
 D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\model\statistic\KlineRange.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractCodeEnum.java
+D:\== Program ==\demo\Public\src\main\java\com\trade\hedge\service\impl\ContractHedgeServiceImpl.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\PeriodEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\hedge\context\HedgeContext.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractOrderPriceTypeEnum.java
@@ -24,6 +25,7 @@ D:\== Program ==\demo\Public\src\main\java\com\trade\controller\StatisticControl
 D:\== Program ==\demo\Public\src\main\java\com\trade\TradeApplication.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\controller\BaseController.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\service\swap\impl\SwapTradeServiceImpl.java
+D:\== Program ==\demo\Public\src\main\java\com\trade\hedge\service\HedgeServiceFactory.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\service\spot\SpotBasicService.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\context\SwapAPI.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\model\spot\Kline.java
@@ -33,6 +35,7 @@ D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\service\trade\impl\
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\service\contract\ContractMarketService.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\hedge\thread\HedgeTrackScheduler.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\SymbolEnum.java
+D:\== Program ==\demo\Public\src\main\java\com\trade\hedge\service\impl\SwapHedgeServiceImpl.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractLeverRateEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\model\spot\DepthDetail.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\controller\ContractController.java
@@ -56,7 +59,6 @@ D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\service\trade\Analy
 D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\service\trade\AnalyseServiceFactory.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\service\trade\impl\analyse\AbstractAnalyseServiceImpl.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\controller\TradeController.java
-D:\== Program ==\demo\Public\src\main\java\com\trade\hedge\service\impl\HedgeServiceImpl.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\service\contract\impl\ContractAccountServiceImpl.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\SymbolUSDTEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\service\trade\impl\TradeServiceImpl.java
@@ -74,6 +76,7 @@ D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractTradeTy
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\context\SpotAPI.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\service\trade\TradeService.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\model\contract\TriggerOrder.java
+D:\== Program ==\demo\Public\src\main\java\com\trade\analyse\model\trade\HedgeConfig.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractTypeEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\DepthEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\service\swap\SwapTradeService.java

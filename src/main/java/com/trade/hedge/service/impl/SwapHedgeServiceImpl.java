@@ -1,7 +1,6 @@
 package com.trade.hedge.service.impl;
 
 import com.trade.analyse.model.trade.Track;
-import com.trade.hedge.context.HedgeContext;
 import com.trade.huobi.enums.ContractDirectionEnum;
 import com.trade.huobi.enums.ContractOffsetEnum;
 import com.trade.huobi.enums.ContractOrderPriceTypeEnum;
@@ -41,7 +40,7 @@ public class SwapHedgeServiceImpl extends AbstractHedgeService {
     protected Result open(Track track, ContractDirectionEnum direction, long volume) {
         return swapTradeService.order(track.getAccess(), track.getSecret(), track.getContractCode()
                 , null, volume, direction, ContractOffsetEnum.OPEN
-                , track.getLeverRate(), ContractOrderPriceTypeEnum.OPTIMAL_5);
+                , track.getHedgeConfig().getLeverRate(), ContractOrderPriceTypeEnum.OPTIMAL_5);
     }
 
     @Override
@@ -49,7 +48,7 @@ public class SwapHedgeServiceImpl extends AbstractHedgeService {
         return swapTradeService.order(track.getAccess(), track.getSecret(), track.getContractCode()
                 , null, position.getVolume().longValue()
                 , ContractDirectionEnum.get(position.getDirection()).getNegate(), ContractOffsetEnum.CLOSE
-                , track.getLeverRate(), ContractOrderPriceTypeEnum.OPTIMAL_5);
+                , track.getHedgeConfig().getLeverRate(), ContractOrderPriceTypeEnum.OPTIMAL_5);
     }
 
     @Override
@@ -60,11 +59,11 @@ public class SwapHedgeServiceImpl extends AbstractHedgeService {
     @Override
     protected boolean isStopTrade(Track track, Position position) {
         // 停止交易, 无持仓 || 平仓张数 > basis, 则不再向下追仓
-        if (!HedgeContext.isStopTrade()) {
+        if (!track.getHedgeConfig().isStopTrade()) {
             return false;
         }
         Position positionCheck = swapAccountService.getPositionInfo(track.getAccess(), track.getSecret(), track.getContractCode());
-        return positionCheck == null || position.getVolume().compareTo(BigDecimal.valueOf(track.getBasisVolume())) > 0;
+        return positionCheck == null || position.getVolume().compareTo(BigDecimal.valueOf(track.getHedgeConfig().getBasisVolume())) > 0;
     }
 
     @Override

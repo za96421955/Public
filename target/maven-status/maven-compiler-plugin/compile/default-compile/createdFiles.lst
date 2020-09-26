@@ -7,6 +7,8 @@ com\trade\hedge\context\HedgeContext.class
 com\trade\huobi\context\SwapAPI$Market.class
 com\trade\analyse\model\trade\Analyse.class
 com\trade\analyse\context\TradeContext.class
+com\trade\hedge\service\impl\SwapHedgeServiceImpl.class
+com\trade\hedge\service\impl\ContractHedgeServiceImpl.class
 com\trade\analyse\service\trade\AnalyseServiceFactory.class
 com\trade\analyse\thread\OrderTrackScheduler.class
 com\trade\huobi\enums\ContractOrderPriceTypeEnum.class
@@ -28,6 +30,7 @@ com\trade\huobi\demo\RequestDemo.class
 com\trade\huobi\context\SpotAPI$Basic.class
 com\trade\huobi\enums\SymbolUSDTEnum.class
 com\trade\huobi\service\contract\ContractMarketService.class
+com\trade\hedge\service\HedgeServiceFactory.class
 com\trade\huobi\enums\DepthTypeEnum.class
 com\trade\analyse\service\trade\TradeService.class
 com\trade\huobi\context\SwapAPI$Trade.class
@@ -65,6 +68,7 @@ com\trade\analyse\model\statistic\PullTrack.class
 com\trade\huobi\service\swap\impl\SwapTradeServiceImpl.class
 com\trade\BaseService.class
 com\trade\utils\DateUtil.class
+com\trade\analyse\model\trade\HedgeConfig.class
 com\trade\utils\GuidUtil.class
 com\trade\huobi\service\HuobiHttpRequest.class
 com\trade\huobi\model\spot\Depth.class
@@ -85,7 +89,6 @@ com\trade\huobi\service\contract\ContractBasicService.class
 com\trade\huobi\enums\ContractDirectionEnum.class
 com\trade\analyse\model\trade\Prophecy.class
 com\trade\huobi\context\ContractAPI$Account.class
-com\trade\hedge\service\impl\HedgeServiceImpl.class
 com\trade\huobi\service\spot\impl\SpotMarketServiceImpl.class
 com\trade\huobi\service\swap\SwapAccountService.class
 com\trade\controller\SpotController.class

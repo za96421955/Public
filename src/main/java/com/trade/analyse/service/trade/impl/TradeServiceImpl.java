@@ -110,7 +110,7 @@ public class TradeServiceImpl extends BaseService implements TradeService {
         }
 
         // 计算可用张数, 下单张数
-        int volume = orderService.getAvailableVolume(track.getAccess(), track.getSecret(), track.getSymbol(), track.getLeverRate());
+        int volume = orderService.getAvailableVolume(track.getAccess(), track.getSecret(), track.getSymbol(), track.getHedgeConfig().getLeverRate());
         if (volume <= 0) {
             return Result.buildFail("可用张数 <= 0");
         }
@@ -120,7 +120,7 @@ public class TradeServiceImpl extends BaseService implements TradeService {
         logger.info("[{}] track{}, volume={}, orderVolume={}, 计算可用张数, 下单张数", LOG_MARK, track, volume, orderVolume);
 
         // 下单
-        Result result = orderService.limitOpen(track.getAccess(), track.getSecret(), track.getSymbol(), track.getLeverRate()
+        Result result = orderService.limitOpen(track.getAccess(), track.getSecret(), track.getSymbol(), track.getHedgeConfig().getLeverRate()
                 , analyse, orderVolume);
         if (result != null && result.success()) {
             String orderId = JSONObject.parseObject(result.getData().toString()).getLong("order_id") + "";

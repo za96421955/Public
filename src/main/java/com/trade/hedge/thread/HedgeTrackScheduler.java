@@ -42,7 +42,7 @@ public class HedgeTrackScheduler extends BaseService {
             }
             try {
                 // 获取对冲服务
-                HedgeService service = hedgeServiceFactory.getHedgeService(HedgeServiceFactory.CONTRACT);
+                HedgeService service = hedgeServiceFactory.getHedgeService(track.getHedgeConfig().getHedgeType());
                 // 1, 持仓检查
                 Result result = service.positionCheck(track);
                 if (result.success()) {

@@ -1,6 +1,7 @@
 package com.trade.analyse.model.trade;
 
 import com.trade.analyse.context.TradeContext;
+import com.trade.hedge.service.HedgeServiceFactory;
 import com.trade.huobi.enums.*;
 import com.trade.huobi.model.contract.Order;
 import com.trade.analyse.service.trade.TradeService;
@@ -26,11 +27,7 @@ public class Track implements Serializable {
     private String access;
     private String secret;
     private SymbolEnum symbol;
-    private ContractLeverRateEnum leverRate;
-    /** 基础张数 */
-    private long basisVolume = 1;
-    /** 计划收益价格 */
-    private BigDecimal incomePricePlan = BigDecimal.ONE;
+    private HedgeConfig hedgeConfig = HedgeConfig.initDefault();
 
     /** 是否允许开仓 */
     private boolean isOpenAllow;
@@ -51,36 +48,6 @@ public class Track implements Serializable {
     public Track(String access, String secret) {
         this.access = access;
         this.secret = secret;
-    }
-
-    public Track setAccess(String access) {
-        this.access = access;
-        return this;
-    }
-
-    public Track setSecret(String secret) {
-        this.secret = secret;
-        return this;
-    }
-
-    public Track setSymbol(SymbolEnum symbol) {
-        this.symbol = symbol;
-        return this;
-    }
-
-    public Track setLeverRate(ContractLeverRateEnum leverRate) {
-        this.leverRate = leverRate;
-        return this;
-    }
-
-    public Track setBasisVolume(long basisVolume) {
-        this.basisVolume = basisVolume;
-        return this;
-    }
-
-    public Track setIncomePricePlan(BigDecimal incomePricePlan) {
-        this.incomePricePlan = incomePricePlan;
-        return this;
     }
 
     public Analyse getLastAnalyse() {
@@ -178,16 +145,7 @@ public class Track implements Serializable {
         return "Track{" +
                 "access='" + access + '\'' +
                 ", symbol=" + symbol +
-                ", leverRate=" + leverRate +
-                ", basisVolume=" + basisVolume +
-                ", incomePricePlan=" + incomePricePlan +
-//                ", isOpenAllow=" + isOpenAllow +
-//                ", lastAnalyse=" + lastAnalyse +
-//                ", lastOrderId='" + lastOrderId + '\'' +
-//                ", lastOpenTime=" + lastOpenTime +
-//                ", breakdownNum=" + breakdownNum +
-//                ", lastCancelDirection=" + lastCancelDirection +
-//                ", lastCancelTime=" + lastCancelTime +
+                ", hedgeConfig=" + hedgeConfig +
                 '}';
     }
 
