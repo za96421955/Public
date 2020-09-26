@@ -1,5 +1,7 @@
 package com.trade.huobi.enums;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 交易对
  * <p>〈功能详细描述〉</p>
@@ -33,6 +35,18 @@ public enum ContractCodeEnum {
     public static ContractCodeEnum get(String value) {
         for (ContractCodeEnum e : values()) {
             if (e.getValue().equals(value)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    public static ContractCodeEnum getUSD(String symbol) {
+        if (StringUtils.isBlank(symbol)) {
+            return null;
+        }
+        for (ContractCodeEnum e : values()) {
+            if (e.getValue().equals(symbol.toUpperCase() + "-USD")) {
                 return e;
             }
         }

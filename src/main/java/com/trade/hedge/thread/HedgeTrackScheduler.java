@@ -5,12 +5,15 @@ import com.trade.analyse.context.TradeContext;
 import com.trade.analyse.model.trade.Track;
 import com.trade.analyse.service.trade.TradeService;
 import com.trade.hedge.service.HedgeService;
+import com.trade.hedge.service.HedgeServiceFactory;
 import com.trade.huobi.model.Result;
 import com.trade.huobi.model.contract.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -29,7 +32,7 @@ import java.math.MathContext;
 public class HedgeTrackScheduler extends BaseService {
 
     @Autowired
-    private HedgeService hedgeService;
+    private HedgeServiceFactory hedgeServiceFactory;
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void run() {
@@ -38,15 +41,16 @@ public class HedgeTrackScheduler extends BaseService {
                 continue;
             }
             try {
+                // 获取对冲服务
+                HedgeService service = hedgeServiceFactory.getHedgeService(HedgeServiceFactory.CONTRACT);
                 // 1, 持仓检查
-                Result result = hedgeService.positionCheck(track);
+                Result result = service.positionCheck(track);
                 if (result.success()) {
                     Object[] positions = result.getData();
-                    Position up = (Position) positions[0];
-                    Position down = (Position) positions[1];
+                    Position buy = (Position) positions[0];
+                    Position sell = (Position) positions[1];
                     // 2, 双向平仓检查
-                    hedgeService.closeCheck(track, up, down);
-//                    logger.info("[对冲追踪] track={}, up={}, down={}, 双向平仓检查 End", track, up, down);
+                    service.closeCheck(track, buy, sell);
                 } else {
                     logger.info("[对冲追踪] track={}, result={}, 持仓检查未通过, 无持仓信息", track, result);
                 }

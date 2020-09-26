@@ -1,11 +1,8 @@
 package com.trade.analyse.model.trade;
 
 import com.trade.analyse.context.TradeContext;
+import com.trade.huobi.enums.*;
 import com.trade.huobi.model.contract.Order;
-import com.trade.huobi.enums.ContractDirectionEnum;
-import com.trade.huobi.enums.ContractLeverRateEnum;
-import com.trade.huobi.enums.ContractOffsetEnum;
-import com.trade.huobi.enums.SymbolEnum;
 import com.trade.analyse.service.trade.TradeService;
 import lombok.Getter;
 import lombok.Setter;
@@ -91,6 +88,13 @@ public class Track implements Serializable {
             lastAnalyse = TradeContext.getAnalyse();
         }
         return lastAnalyse;
+    }
+
+    public ContractCodeEnum getContractCode() {
+        if (this.symbol == null) {
+            return null;
+        }
+        return ContractCodeEnum.getUSD(this.getSymbol().getValue());
     }
 
     /**

@@ -33,19 +33,9 @@ public interface HedgeService {
      *
      * @author 陈晨
      * @date 2020/9/25 14:13
-     * @param track, up, down
+     * @param track, buy, sell
      **/
-    void closeCheck(Track track, Position up, Position down);
-
-    /**
-     * @description 平仓检查
-     * <p>〈功能详细描述〉</p>
-     *
-     * @author 陈晨
-     * @date 2020/9/24 15:05
-     * @param track, position, incomeMultiple, lossVolume
-     **/
-    void closeCheck(Track track, Position position, BigDecimal incomeMultiple, long lossVolume);
+    void closeCheck(Track track, Position buy, Position sell);
 
 }
 
