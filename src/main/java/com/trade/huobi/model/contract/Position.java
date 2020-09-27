@@ -84,11 +84,11 @@ public class Position implements Serializable {
                 "symbol='" + symbol + '\'' +
                 ", contractCode='" + contractCode + '\'' +
                 ", contractType='" + contractType + '\'' +
-                ", volume=" + volume +
-                ", costHold=" + costHold +
+                ", volume=" + volume.longValue() +
+                ", costHold=" + costHold.setScale(3, BigDecimal.ROUND_DOWN) +
                 ", leverRate=" + leverRate +
                 ", direction='" + direction + '\'' +
-                ", profit=" + profit +
+                ", profit=" + profit.setScale(6, BigDecimal.ROUND_DOWN) +
                 ", lastPrice=" + lastPrice +
                 '}';
     }

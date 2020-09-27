@@ -83,12 +83,12 @@ public abstract class AbstractHedgeService extends BaseService implements HedgeS
         // 2, 开多平仓检查
         Result result = this.closeCheck(track, buy
                 , this.calculateIncomeMultiple(track, buy, sell, ContractDirectionEnum.BUY)
-                , this.calculateCloseLossVolume(track, buy));
+                , this.calculateCloseLossVolume(track, sell));
         logger.debug("[{}] track={}, result={}, Buy - 开多平仓检查", LOG_MARK, track, result);
         // 3, 开空平仓检查
         result = this.closeCheck(track, sell
                 , this.calculateIncomeMultiple(track, buy, sell, ContractDirectionEnum.SELL)
-                , this.calculateCloseLossVolume(track, sell));
+                , this.calculateCloseLossVolume(track, buy));
         logger.debug("[{}] track={}, result={}, Sell - 开空平仓检查", LOG_MARK, track, result);
     }
 

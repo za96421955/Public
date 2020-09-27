@@ -135,7 +135,7 @@ public final class HuobiHttpRequest {
             curl.append(" -d '").append(data).append("'");
         }
         curl.append(" \"").append(url).append("\"");
-//        logger.info("[HTTP] Request: {}", curl);
+        logger.debug("[HTTP] Request: {}", curl);
 
         // 构建请求对象
         HttpUriRequest uriRequest;

@@ -4,6 +4,7 @@ import com.trade.hedge.service.HedgeServiceFactory;
 import com.trade.huobi.enums.ContractLeverRateEnum;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
+@ToString
 public class HedgeConfig implements Serializable {
     private static final long serialVersionUID = -4336975265204074693L;
 
@@ -32,7 +34,7 @@ public class HedgeConfig implements Serializable {
     /** 止盈基础倍率 */
     private BigDecimal profitBasisMultiple = BigDecimal.ONE;
     /** 止盈追踪间隔时间, 毫秒 */
-    private long profitTrackIntervalTime = 750;
+    private long profitTrackIntervalTime = 1200;
     /** 超时时间, 秒 */
     private int timeout = 30;
     /** 停止交易 */
