@@ -1,10 +1,9 @@
 package com.trade.controller;
 
 import com.trade.analyse.context.TradeContext;
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 import com.trade.analyse.service.trade.OrderService;
 import com.trade.analyse.service.trade.TradeService;
-import com.trade.hedge.context.HedgeContext;
 import com.trade.huobi.enums.ContractLeverRateEnum;
 import com.trade.huobi.enums.SymbolEnum;
 import com.trade.huobi.model.Result;

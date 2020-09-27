@@ -1,7 +1,7 @@
 package com.trade.analyse.context;
 
 import com.trade.analyse.model.trade.Analyse;
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 
 import java.util.ArrayList;
 import java.util.HashMap;

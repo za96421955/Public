@@ -2,8 +2,7 @@ package com.trade.hedge.thread;
 
 import com.trade.BaseService;
 import com.trade.analyse.context.TradeContext;
-import com.trade.analyse.model.trade.Track;
-import com.trade.analyse.service.trade.TradeService;
+import com.trade.hedge.model.Track;
 import com.trade.hedge.service.HedgeService;
 import com.trade.hedge.service.HedgeServiceFactory;
 import com.trade.huobi.model.Result;
@@ -11,11 +10,6 @@ import com.trade.huobi.model.contract.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.math.MathContext;
 
 /**
  * 对冲追踪

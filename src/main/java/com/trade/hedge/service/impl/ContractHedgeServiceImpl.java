@@ -1,6 +1,6 @@
 package com.trade.hedge.service.impl;
 
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 import com.trade.huobi.enums.ContractDirectionEnum;
 import com.trade.huobi.enums.ContractOffsetEnum;
 import com.trade.huobi.enums.ContractOrderPriceTypeEnum;

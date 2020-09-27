@@ -1,7 +1,7 @@
 package com.trade.analyse.service.trade;
 
 import com.trade.huobi.model.Result;
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 
 
 /**

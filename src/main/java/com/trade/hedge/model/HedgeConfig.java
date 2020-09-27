@@ -1,4 +1,4 @@
-package com.trade.analyse.model.trade;
+package com.trade.hedge.model;
 
 import com.trade.hedge.service.HedgeServiceFactory;
 import com.trade.huobi.enums.ContractLeverRateEnum;

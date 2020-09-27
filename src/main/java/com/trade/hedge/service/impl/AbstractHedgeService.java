@@ -2,7 +2,7 @@ package com.trade.hedge.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.trade.BaseService;
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 import com.trade.hedge.service.HedgeService;
 import com.trade.huobi.enums.ContractDirectionEnum;
 import com.trade.huobi.enums.SymbolUSDTEnum;

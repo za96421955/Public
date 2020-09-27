@@ -2,13 +2,12 @@ package com.trade.analyse.thread;
 
 import com.trade.analyse.context.TradeContext;
 import com.trade.huobi.model.Result;
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 import com.trade.BaseService;
 import com.trade.huobi.enums.SymbolUSDTEnum;
 import com.trade.analyse.service.trade.AnalyseServiceFactory;
 import com.trade.analyse.service.trade.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**

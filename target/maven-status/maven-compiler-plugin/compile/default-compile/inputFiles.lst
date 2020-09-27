@@ -70,7 +70,6 @@ D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\service\spot\SpotMark
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\model\contract\Position.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\model\Result.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\controller\SwapController.java
-D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\context\Key.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractDirectionEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\enums\ContractTradeTypeHistoryEnum.java
 D:\== Program ==\demo\Public\src\main\java\com\trade\huobi\context\SpotAPI.java

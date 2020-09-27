@@ -1,10 +1,8 @@
 package com.trade.hedge.service;
 
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 import com.trade.huobi.model.Result;
 import com.trade.huobi.model.contract.Position;
-
-import java.math.BigDecimal;
 
 /**
  * 对冲服务

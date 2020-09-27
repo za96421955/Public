@@ -9,7 +9,7 @@ import com.trade.huobi.model.contract.Position;
 import com.trade.huobi.model.contract.TriggerOrder;
 import com.trade.huobi.model.spot.Kline;
 import com.trade.analyse.model.trade.Analyse;
-import com.trade.analyse.model.trade.Track;
+import com.trade.hedge.model.Track;
 import com.trade.BaseService;
 import com.trade.huobi.service.contract.ContractAccountService;
 import com.trade.huobi.service.contract.ContractTradeService;

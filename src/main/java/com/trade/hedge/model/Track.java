@@ -1,7 +1,7 @@
-package com.trade.analyse.model.trade;
+package com.trade.hedge.model;
 
 import com.trade.analyse.context.TradeContext;
-import com.trade.hedge.service.HedgeServiceFactory;
+import com.trade.analyse.model.trade.Analyse;
 import com.trade.huobi.enums.*;
 import com.trade.huobi.model.contract.Order;
 import com.trade.analyse.service.trade.TradeService;

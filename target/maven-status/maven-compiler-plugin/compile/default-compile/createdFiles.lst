@@ -35,7 +35,6 @@ com\trade\huobi\enums\DepthTypeEnum.class
 com\trade\analyse\service\trade\TradeService.class
 com\trade\huobi\context\SwapAPI$Trade.class
 com\trade\analyse\service\trade\impl\StatisticServiceImpl.class
-com\trade\huobi\context\Key.class
 com\trade\huobi\service\swap\SwapTradeService.class
 com\trade\huobi\context\SpotAPI.class
 com\trade\controller\SwapController.class
