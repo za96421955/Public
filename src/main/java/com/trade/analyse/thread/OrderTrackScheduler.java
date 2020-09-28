@@ -1,6 +1,6 @@
 package com.trade.analyse.thread;
 
-import com.trade.analyse.context.TradeContext;
+import com.trade.analyse.context.AnalyseContext;
 import com.trade.huobi.model.Result;
 import com.trade.hedge.model.Track;
 import com.trade.BaseService;
@@ -28,7 +28,7 @@ public class OrderTrackScheduler extends BaseService {
 //    @Scheduled(cron = "0/5 * * * * ?")
     public void run() {
 //        logger.info("[订单追踪] ===============================");
-        for (Track track : TradeContext.getTrackList()) {
+        for (Track track : AnalyseContext.getTrackList()) {
             if (track == null) {
                 continue;
             }

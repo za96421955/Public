@@ -2,7 +2,7 @@ package com.trade.analyse.service.trade.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.trade.huobi.enums.*;
-import com.trade.analyse.context.TradeContext;
+import com.trade.analyse.context.AnalyseContext;
 import com.trade.huobi.model.Result;
 import com.trade.huobi.model.contract.Order;
 import com.trade.huobi.model.contract.Position;
@@ -88,7 +88,7 @@ public class TradeServiceImpl extends BaseService implements TradeService {
     @Override
     public Result orderOpen(Track track) {
         // 获取现价分析信息
-        Analyse analyse = TradeContext.getAnalyse();
+        Analyse analyse = AnalyseContext.getAnalyse();
         if (analyse == null) {
             return Result.buildFail("当前分析数据获取失败, 不建议买入");
         }

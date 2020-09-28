@@ -1,14 +1,13 @@
 package com.trade.hedge.service.impl;
 
 import com.trade.hedge.model.Track;
-import com.trade.huobi.enums.ContractDirectionEnum;
-import com.trade.huobi.enums.ContractOffsetEnum;
-import com.trade.huobi.enums.ContractOrderPriceTypeEnum;
-import com.trade.huobi.enums.ContractTypeEnum;
+import com.trade.huobi.enums.*;
 import com.trade.huobi.model.Result;
 import com.trade.huobi.model.contract.Order;
 import com.trade.huobi.model.contract.Position;
+import com.trade.huobi.model.spot.Kline;
 import com.trade.huobi.service.contract.ContractAccountService;
+import com.trade.huobi.service.contract.ContractMarketService;
 import com.trade.huobi.service.contract.ContractTradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +27,8 @@ import java.util.List;
 public class ContractHedgeServiceImpl extends AbstractHedgeService {
 
     @Autowired
+    private ContractMarketService contractMarketService;
+    @Autowired
     private ContractAccountService contractAccountService;
     @Autowired
     private ContractTradeService contractTradeService;
@@ -35,6 +36,15 @@ public class ContractHedgeServiceImpl extends AbstractHedgeService {
     @Override
     protected List<Position> getPositionList(Track track) {
         return contractAccountService.getPositionList(track.getAccess(), track.getSecret(), track.getSymbol());
+    }
+
+    @Override
+    protected Kline getKlineCurr(SymbolEnum symbol, ContractTypeEnum contractType) {
+        Kline kline = contractMarketService.getKlineCurr(SymbolContractEnum.get(symbol, ContractTypeEnum.THIS_WEEK));
+        if (kline == null) {
+            kline = spotMarketService.getKlineCurr(SymbolUSDTEnum.getUSDT(symbol.getValue()));
+        }
+        return kline;
     }
 
     @Override

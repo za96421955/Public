@@ -1,6 +1,7 @@
 package com.trade.controller;
 
-import com.trade.analyse.context.TradeContext;
+import com.trade.analyse.context.AnalyseContext;
+import com.trade.hedge.context.HedgeContext;
 import com.trade.hedge.model.Track;
 import com.trade.analyse.service.trade.OrderService;
 import com.trade.analyse.service.trade.TradeService;
@@ -34,7 +35,7 @@ public class TradeController extends BaseController {
     @Description("获取实时分析数据")
     public Result analyse(@PathVariable String symbol) {
         try {
-            return Result.buildSuccess(TradeContext.getAnalyse());
+            return Result.buildSuccess(AnalyseContext.getAnalyse());
         } catch (Exception e) {
             logger.error("[交易] symbol={}, 获取实时分析数据异常, {}", symbol, e.getMessage(), e);
             return Result.buildFail(e.getMessage());
@@ -58,10 +59,8 @@ public class TradeController extends BaseController {
     public Track order(String access, String secret, @PathVariable String symbol
             , String hedgeType, String leverRate, long basisVolume, BigDecimal incomePricePlan
             , BigDecimal profitBasisMultiple, Long profitTrackIntervalTime, Integer timeout) {
-        Track track = TradeContext.getTrack(access);
+        Track track = HedgeContext.getTrack(access, SymbolEnum.get(symbol), hedgeType);
         track.setSecret(secret);
-        track.setSymbol(SymbolEnum.get(symbol));
-        track.getHedgeConfig().setHedgeType(hedgeType);
         track.getHedgeConfig().setLeverRate(ContractLeverRateEnum.get(leverRate));
         track.getHedgeConfig().setBasisVolume(basisVolume);
         track.getHedgeConfig().setIncomePricePlan(incomePricePlan);
@@ -77,10 +76,11 @@ public class TradeController extends BaseController {
         return track;
     }
 
-    @GetMapping("/changeTrade/{access}")
+    @GetMapping("/changeTrade/{symbol}/{hedgeType}/{access}")
     @Description("交易切换")
-    public String changeTrade(@PathVariable String access) {
-        Track track = TradeContext.getTrack(access);
+    public String changeTrade(@PathVariable String access, @PathVariable String symbol
+            , @PathVariable String hedgeType) {
+        Track track = HedgeContext.getTrack(access, SymbolEnum.get(symbol), hedgeType);
         track.getHedgeConfig().setStopTrade(!track.getHedgeConfig().isStopTrade());
         return "isStopTrade: " + track.getHedgeConfig().isStopTrade();
     }

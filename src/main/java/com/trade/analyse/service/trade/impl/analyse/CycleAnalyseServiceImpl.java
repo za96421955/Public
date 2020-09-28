@@ -1,6 +1,6 @@
 package com.trade.analyse.service.trade.impl.analyse;
 
-import com.trade.analyse.context.TradeContext;
+import com.trade.analyse.context.AnalyseContext;
 import com.trade.huobi.model.spot.Kline;
 import com.trade.analyse.model.trade.Analyse;
 import com.trade.analyse.model.trade.Prophecy;
@@ -74,7 +74,7 @@ public class CycleAnalyseServiceImpl extends AbstractAnalyseServiceImpl {
             analyse.setTriggerLoss(analyse.getLoss().add(prophecy.getPeriod().getAdjustmentPrice().multiply(BigDecimal.valueOf(3))));
         }
         // 逆向, 则购买方向取反
-        if (!TradeContext.getDirectionSwitch()) {
+        if (!AnalyseContext.getDirectionSwitch()) {
             analyse.negate();
         }
         return analyse;

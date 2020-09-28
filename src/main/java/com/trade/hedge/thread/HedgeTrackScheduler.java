@@ -1,7 +1,7 @@
 package com.trade.hedge.thread;
 
 import com.trade.BaseService;
-import com.trade.analyse.context.TradeContext;
+import com.trade.hedge.context.HedgeContext;
 import com.trade.hedge.model.Track;
 import com.trade.hedge.service.HedgeService;
 import com.trade.hedge.service.HedgeServiceFactory;
@@ -30,7 +30,7 @@ public class HedgeTrackScheduler extends BaseService {
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void run() {
-        for (Track track : TradeContext.getTrackList()) {
+        for (Track track : HedgeContext.getTrackList()) {
             if (track == null) {
                 continue;
             }

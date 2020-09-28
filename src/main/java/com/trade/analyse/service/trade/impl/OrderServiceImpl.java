@@ -2,7 +2,7 @@ package com.trade.analyse.service.trade.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.trade.huobi.enums.*;
-import com.trade.analyse.context.TradeContext;
+import com.trade.analyse.context.AnalyseContext;
 import com.trade.huobi.model.Result;
 import com.trade.huobi.model.contract.Account;
 import com.trade.huobi.model.contract.Position;
@@ -105,8 +105,8 @@ public class OrderServiceImpl extends BaseService implements OrderService {
         // 记录下单信息
         if (result != null && result.success()) {
             String orderId = JSONObject.parseObject(result.getData().toString()).getLong("order_id") + "";
-            TradeContext.getTrack(access).setLastOrderId(orderId);
-            TradeContext.getTrack(access).setLastOpenTime(System.currentTimeMillis());
+            AnalyseContext.getTrack(access).setLastOrderId(orderId);
+            AnalyseContext.getTrack(access).setLastOpenTime(System.currentTimeMillis());
         }
         return result;
     }

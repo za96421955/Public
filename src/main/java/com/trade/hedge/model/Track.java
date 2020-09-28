@@ -1,6 +1,6 @@
 package com.trade.hedge.model;
 
-import com.trade.analyse.context.TradeContext;
+import com.trade.analyse.context.AnalyseContext;
 import com.trade.analyse.model.trade.Analyse;
 import com.trade.huobi.enums.*;
 import com.trade.huobi.model.contract.Order;
@@ -52,7 +52,7 @@ public class Track implements Serializable {
 
     public Analyse getLastAnalyse() {
         if (lastAnalyse == null) {
-            lastAnalyse = TradeContext.getAnalyse();
+            lastAnalyse = AnalyseContext.getAnalyse();
         }
         return lastAnalyse;
     }

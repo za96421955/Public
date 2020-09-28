@@ -1,12 +1,13 @@
 com\trade\analyse\service\trade\impl\analyse\CycleAnalyseServiceImpl.class
 com\trade\huobi\model\spot\Kline.class
 com\trade\huobi\service\spot\impl\SpotBasicServiceImpl.class
+com\trade\hedge\model\HedgeConfig.class
+com\trade\huobi\service\swap\impl\SwapMarketServiceImpl.class
 com\trade\utils\BeanUtil.class
 com\trade\huobi\model\spot\DepthDetail.class
 com\trade\hedge\context\HedgeContext.class
 com\trade\huobi\context\SwapAPI$Market.class
 com\trade\analyse\model\trade\Analyse.class
-com\trade\analyse\context\TradeContext.class
 com\trade\hedge\service\impl\SwapHedgeServiceImpl.class
 com\trade\hedge\service\impl\ContractHedgeServiceImpl.class
 com\trade\analyse\service\trade\AnalyseServiceFactory.class
@@ -22,6 +23,7 @@ com\trade\huobi\enums\ContractTradeTypeHistoryEnum.class
 com\trade\TradeApplication.class
 com\trade\analyse\service\trade\AnalyseService.class
 com\trade\huobi\enums\DepthEnum.class
+com\trade\hedge\model\Track.class
 com\trade\huobi\context\ContractAPI$Trade.class
 com\trade\huobi\model\contract\Position.class
 com\trade\analyse\service\trade\StatisticService.class
@@ -43,11 +45,14 @@ com\trade\analyse\model\statistic\ProfitLoss.class
 com\trade\analyse\thread\OpenScheduler.class
 com\trade\huobi\enums\ContractTradeTypeEnum.class
 com\trade\huobi\context\SwapAPI$Basic.class
+com\trade\huobi\enums\SymbolContractEnum.class
 com\trade\controller\BaseController.class
-com\trade\analyse\model\trade\Track.class
+com\trade\huobi\service\contract\impl\ContractMarketServiceImpl.class
 com\trade\huobi\enums\SymbolEnum.class
+com\trade\analyse\context\AnalyseContext.class
 com\trade\hedge\service\HedgeService.class
 com\trade\huobi\model\contract\Order.class
+com\trade\huobi\service\swap\SwapMarketService.class
 com\trade\huobi\service\contract\ContractTradeService.class
 com\trade\controller\StatisticController.class
 com\trade\huobi\service\spot\SpotMarketService.class
@@ -67,7 +72,6 @@ com\trade\analyse\model\statistic\PullTrack.class
 com\trade\huobi\service\swap\impl\SwapTradeServiceImpl.class
 com\trade\BaseService.class
 com\trade\utils\DateUtil.class
-com\trade\analyse\model\trade\HedgeConfig.class
 com\trade\utils\GuidUtil.class
 com\trade\huobi\service\HuobiHttpRequest.class
 com\trade\huobi\model\spot\Depth.class
